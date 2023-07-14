@@ -5,15 +5,19 @@ import string
 def get_password_options():
     options = {}
     try:
-        options['ength'] = int(input("Enter the password length: "))
+        options['length'] = int(input("Enter the password length: "))
         options['include_letters'] = input("Include letters? (y/n): ").lower()
         options['include_numbers'] = input("Include numbers? (y/n): ").lower()
         options['include_special_chars'] = input(
             "Include special characters? (y/n): ").lower()
 
+        if options['length'] <= 0:
+            raise ValueError(
+                "Invalid input. Please enter a positive integer for length.")
+
         if options['include_letters'] not in ['y', 'n'] or options['include_numbers'] not in ['y', 'n'] or options['include_special_chars'] not in ['y', 'n']:
             raise ValueError(
-                "Invalid input. Please enter 'y' for yes or 'n' for no.")
+                "Invalid input. Please enter 'y' for yes or 'n' for no. ONLY")
 
     except ValueError as e:
         print("Error:", e)
